@@ -18,3 +18,30 @@ jobs:
       - run:
           name: notify build is finished
           command: echo "The build is finished!"
+
+  testlinks:
+    docker:
+      - image: circleci/ruby:2.4.1-node-browsers
+
+    steps:
+      - checkout
+
+      - run:
+          name: install dependencies
+          command: bundle install
+
+      - run:
+          name: build the jekyll site
+          command: bundle exec jekyll build
+
+      - run:
+          name: run html proofer
+          command: REPLACE-ME-WITH-SCRIPT
+
+workflows:
+  version: 2
+
+  build_and_test:
+    jobs:
+      - build
+      - testlinks
